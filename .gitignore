@@ -30,13 +30,16 @@ htmlcov/
 .tox/
 
 # 报告和日志
-reports/
-logs/
-*.log
+reports/allure/*
+!reports/allure/.gitkeep
+reports/html/*
+!reports/html/.gitkeep
+logs/*
+!logs/.gitkeep
 
 # 数据文件
 data/extract_data/*.yaml
-data/test_cases/
+data/test_cases/*
 !data/test_cases/demo_cases.xlsx
 
 # IDE
