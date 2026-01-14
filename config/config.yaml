@@ -1,0 +1,40 @@
+# 环境配置文件
+env:
+  current: test  # 当前环境: dev/test/prod
+
+environments:
+  dev:
+    base_url: "https://jsonplaceholder.typicode.com"
+    timeout: 30
+    headers:
+      Content-Type: "application/json"
+
+  test:
+    base_url: "http://192.168.8.24:5556"
+    timeout: 30
+    headers:
+      Content-Type: "application/json"
+
+  prod:
+    base_url: "https://jsonplaceholder.typicode.com"
+    timeout: 30
+    headers:
+      Content-Type: "application/json"
+
+# Excel配置
+excel:
+  # 文件路径或目录路径
+  # - 指向单个文件：只加载该文件
+  # - 指向目录：加载目录下所有.xlsx和.xls文件
+  file_path: "data/test_cases"
+  sheet_name: "Sheet1"
+
+# 数据提取配置
+extract:
+  file_path: "data/extract_data/extract_data.yaml"
+
+# 日志配置
+log:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/test.log"

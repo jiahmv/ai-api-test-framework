@@ -1,0 +1,98 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 测试
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# 报告和日志
+reports/
+logs/
+*.log
+
+# 数据文件
+data/extract_data/*.yaml
+data/test_cases/
+!data/test_cases/demo_cases.xlsx
+
+# IDE
+.idea/
+.vscode/
+.claude/
+*.swp
+*.swo
+*~
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 环境变量和配置（安全考虑）
+.env
+.env.local
+.env.*.local
+config/secrets.yaml
+config/production.yaml
+
+# 临时文件
+*.tmp
+*.bak
+*.orig
+
+# 数据库文件
+*.db
+*.sqlite
+*.sqlite3
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb
+
+# mypy 类型检查
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# Celery 任务队列
+celerybeat-schedule
+celerybeat.pid
+
+# Spyder IDE
+.spyderproject
+.spyproject
+
+# Rope
+.ropeproject
+
+# mkdocs 文档
+/site
