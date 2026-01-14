@@ -25,6 +25,28 @@ def pytest_addoption(parser):
         default="all",
         help="指定要运行的sheet名称（逗号分隔），默认'all'执行所有sheet"
     )
+    # 性能测试相关参数
+    parser.addoption(
+        "--concurrent-users",
+        action="store",
+        type=int,
+        default=10,
+        help="性能测试：并发用户数"
+    )
+    parser.addoption(
+        "--duration",
+        action="store",
+        type=int,
+        default=60,
+        help="性能测试：测试持续时间（秒）"
+    )
+    parser.addoption(
+        "--ramp-up",
+        action="store",
+        type=int,
+        default=0,
+        help="性能测试：启动时间（秒）"
+    )
 
 
 def pytest_configure(config):

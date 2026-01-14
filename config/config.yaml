@@ -38,3 +38,26 @@ log:
   level: INFO
   format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
   file: "logs/test.log"
+
+# 性能测试配置
+performance:
+  # 是否启用性能测试
+  enabled: true
+
+  # 默认并发配置
+  default_concurrent_users: 10  # 默认并发用户数
+  default_duration: 60          # 默认测试持续时间（秒）
+  default_ramp_up: 0            # 默认启动时间（秒）
+
+  # 性能阈值
+  thresholds:
+    response_time_p95: 3000     # P95响应时间阈值（毫秒）
+    response_time_p99: 5000     # P99响应时间阈值（毫秒）
+    success_rate: 0.99          # 成功率阈值（0-1）
+    tps: 100                    # TPS阈值
+
+# 性能报告配置
+performance_report:
+  enabled: true
+  output_dir: "reports/performance"
+  include_charts: true         # 是否包含图表（需要安装matplotlib）

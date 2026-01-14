@@ -11,6 +11,22 @@
 - **数据提取**：从响应中提取数据并保存到YAML文件，供后续用例使用
 - **测试报告**：支持HTML和Allure两种报告格式，自动按时间戳归档
 - **完整日志**：详细的日志记录，自动按时间戳归档，便于问题排查
+- **🚀 性能测试**：支持并发压力测试、响应时间统计和性能报告
+
+## 📚 文档目录
+
+- [快速开始](#快速开始) - 5分钟上手指南
+- [功能特性](#特性) - 完整功能列表
+- [运行测试](#运行测试) - API 测试运行方式
+- [性能测试 🚀](#性能测试) - 性能测试使用指南
+- [Excel 用例规范](#excel用例编写规范) - 用例编写说明
+
+### 详细文档
+- [QUICK_START.md](QUICK_START.md) - 快速入门指南
+- [PERFORMANCE_TESTING.md](PERFORMANCE_TESTING.md) - 性能测试完整指南
+- [MULTI_EXCEL_GUIDE.md](MULTI_EXCEL_GUIDE.md) - 多Excel文件管理
+- [REPORT_GUIDE.md](REPORT_GUIDE.md) - 测试报告查看指南
+- [CHANGELOG.md](CHANGELOG.md) - 版本更新日志
 
 ## 技术栈
 
@@ -20,6 +36,7 @@
 - **配置管理**: PyYAML 6.0.1
 - **测试报告**: pytest-html 4.1.1, allure-pytest 2.13.5
 - **日志**: loguru 0.7.2
+- **性能测试**: pytest-xdist 3.5.0, locust 2.17.0
 
 ## 项目结构
 
@@ -84,30 +101,39 @@ environments:
 
 ### 4. 运行测试
 
+#### 方式一：运行指定测试文件（推荐）
+
 ```bash
-# 运行所有测试（加载配置文件中指定的所有Excel文件和所有sheet）
+# 运行 API 功能测试
+pytest tests/test_api.py
+
+# 指定Excel文件
+pytest tests/test_api.py --excel-files data/test_cases/test_cases_users.xlsx
+
+# 指定多个Excel文件
+pytest tests/test_api.py --excel-files "data/test_cases/test_cases_users.xlsx,data/test_cases/test_cases_orders.xlsx"
+
+# 指定sheet
+pytest tests/test_api.py --sheet-names 用户模块
+
+# 指定多个sheet（逗号分隔）
+pytest tests/test_api.py --sheet-names "用户模块,订单模块,商品模块"
+
+# 指定文件和sheet
+pytest tests/test_api.py --excel-files data/test_cases/api_test.xlsx --sheet-names 用户模块
+
+# 生成HTML报告
+pytest tests/test_api.py --html=reports/html/report.html --self-contained-html
+```
+
+#### 方式二：运行所有测试
+
+```bash
+# 运行 tests 目录下的所有测试（包括 API 测试和性能测试）
 pytest tests/
 
 # 运行指定模块
 pytest tests/ -k "用户模块"
-
-# 指定Excel文件运行
-pytest tests/ --excel-files data/test_cases/test_cases_users.xlsx
-
-# 指定多个Excel文件运行
-pytest tests/ --excel-files "data/test_cases/test_cases_users.xlsx,data/test_cases/test_cases_orders.xlsx"
-
-# 指定sheet运行（执行所有sheet中的用例）
-pytest tests/ --sheet-names all
-
-# 指定单个sheet运行
-pytest tests/ --sheet-names 用户模块
-
-# 指定多个sheet运行（逗号分隔）
-pytest tests/ --sheet-names "用户模块,订单模块,商品模块"
-
-# 指定文件和sheet运行
-pytest tests/ --excel-files data/test_cases/api_test.xlsx --sheet-names 用户模块
 
 # 生成HTML报告
 pytest tests/ --html=reports/html/report.html --self-contained-html
@@ -116,6 +142,10 @@ pytest tests/ --html=reports/html/report.html --self-contained-html
 pytest tests/ --alluredir=reports/allure
 allure serve reports/allure
 ```
+
+**说明**：
+- **方式一**：适合只想运行 API 功能测试的场景，更加精确可控
+- **方式二**：适合同时运行 API 测试和性能测试，运行所有测试用例
 
 **Sheet选择功能说明**：
 
@@ -142,6 +172,69 @@ allure serve reports/allure
 3. **命令行模式**：运行时指定文件
 
 详细说明请查看：[MULTI_EXCEL_GUIDE.md](MULTI_EXCEL_GUIDE.md)
+
+## 性能测试 🚀
+
+框架提供了强大的性能测试功能，支持并发压力测试、响应时间统计和详细的性能报告。
+
+### 快速开始
+
+```bash
+# 基本性能测试（10并发，持续60秒）
+pytest tests/test_performance.py
+
+# 指定并发用户数
+pytest tests/test_performance.py --concurrent-users 50
+
+# 指定测试持续时间
+pytest tests/test_performance.py --duration 300
+
+# 指定启动时间（逐步增加并发）
+pytest tests/test_performance.py --ramp-up 30
+
+# 组合使用
+pytest tests/test_performance.py --concurrent-users 100 --duration 300 --ramp-up 60
+```
+
+### 性能测试配置
+
+在 Excel 用例中添加性能配置列：
+
+| 列名 | 说明 | 示例 |
+|------|------|------|
+| 性能配置 | JSON格式的性能参数 | `{"concurrent_users":50,"duration":60}` |
+| 最大响应时间 | 响应时间上限（毫秒） | `2000` |
+
+**性能配置示例**：
+
+```json
+{
+  "concurrent_users": 50,
+  "duration": 60,
+  "ramp_up": 10,
+  "thresholds": {
+    "avg_time": 2.0,
+    "p95_time": 3.0,
+    "success_rate": 0.99
+  }
+}
+```
+
+### 性能报告
+
+测试完成后自动生成报告：
+
+- **HTML报告**: `reports/performance/perf_report_YYYYMMDD_HHMMSS.html`
+- **JSON报告**: `reports/performance/perf_report_YYYYMMDD_HHMMSS.json`
+
+**报告内容**：
+- 📊 测试概要（总请求数、成功率）
+- ⏱️ 响应时间统计（最小、最大、平均、P95、P99）
+- 📈 吞吐量统计（TPS）
+- 📋 用例级别统计
+- ❌ 错误统计
+
+详细的性能测试指南请查看：[PERFORMANCE_TESTING.md](PERFORMANCE_TESTING.md)
 
 ## Excel用例编写规范
 

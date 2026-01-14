@@ -36,6 +36,7 @@ reports/html/*
 !reports/html/.gitkeep
 logs/*
 !logs/.gitkeep
+reports/performance/*
 
 # 数据文件
 data/extract_data/*
@@ -101,3 +102,7 @@ celerybeat.pid
 
 # mkdocs 文档
 /site
+
+# 文档草稿和备份
+docs/drafts/
+*.md.bak

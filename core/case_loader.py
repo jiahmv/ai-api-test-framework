@@ -26,6 +26,8 @@ class TestCase:
         is_run: 是否运行（Y/N）
         headers: 请求头（JSON字符串）
         expected_status: 期望HTTP状态码
+        performance_config: 性能配置（JSON字符串，可选）
+        max_response_time: 最大响应时间（毫秒，可选）
     """
     case_id: str
     module: str
@@ -39,6 +41,8 @@ class TestCase:
     is_run: str
     headers: str
     expected_status: int
+    performance_config: str = "{}"  # 默认为空配置
+    max_response_time: int = 0  # 默认为0表示不限制
 
 
 class CaseLoader:
@@ -196,7 +200,9 @@ class CaseLoader:
                 expected_result=str(row[8] if row[8] is not None else "{}"),
                 is_run=str(row[9] if row[9] else "Y"),
                 headers=str(row[10] if row[10] is not None else "{}"),
-                expected_status=int(row[11] if row[11] else 200)
+                expected_status=int(row[11] if row[11] else 200),
+                performance_config=str(row[12] if len(row) > 12 and row[12] is not None else "{}"),
+                max_response_time=int(row[13] if len(row) > 13 and row[13] is not None else 0)
             )
         except Exception as e:
             self.logger.warning(f"解析行数据失败: {row}, 错误: {e}")
