@@ -38,8 +38,10 @@ logs/*
 !logs/.gitkeep
 
 # 数据文件
-data/extract_data/*.yaml
+data/extract_data/*
+!data/extract_data/.gitkeep
 data/test_cases/*
+!data/test_cases/.gitkeep
 !data/test_cases/demo_cases.xlsx
 
 # IDE
