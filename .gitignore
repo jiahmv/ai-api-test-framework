@@ -57,6 +57,14 @@ data/test_cases/*
 .DS_Store
 Thumbs.db
 
+# Windows 保留设备名称（防止误创建）
+nul
+con
+prn
+aux
+com[1-9]
+lpt[1-9]
+
 # 环境变量和配置（安全考虑）
 .env
 .env.local

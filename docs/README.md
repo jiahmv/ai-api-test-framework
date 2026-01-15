@@ -19,8 +19,7 @@ docs/
 - **README.md** - 项目主文档，包含完整的功能介绍和使用指南
 - **QUICK_START.md** - 5分钟快速上手指南
 - **CHANGELOG.md** - 版本更新日志
-- **PERFORMANCE_TESTING.md** - 性能测试完整指南
-- **PERFORMANCE_QUICK_REFERENCE.md** - 性能测试快速参考
+- **PERFORMANCE_TESTING.md** - 性能测试完整指南（包含快速参考）
 - **MULTI_EXCEL_GUIDE.md** - 多Excel文件管理指南
 - **REPORT_GUIDE.md** - 测试报告查看指南
 
@@ -37,11 +36,10 @@ docs/
 |-------------|---------|
 | 如何快速上手？ | [QUICK_START.md](../QUICK_START.md) |
 | 如何运行测试？ | [README.md - 运行测试](../README.md#运行测试) |
-| 如何进行性能测试？ | [PERFORMANCE_TESTING.md](../PERFORMANCE_TESTING.md) |
+| 如何进行性能测试？ | [PERFORMANCE_TESTING.md](../PERFORMANCE_TESTING.md)（文档末尾包含快速参考） |
 | 如何管理多个Excel文件？ | [MULTI_EXCEL_GUIDE.md](../MULTI_EXCEL_GUIDE.md) |
 | 如何查看测试报告？ | [REPORT_GUIDE.md](../REPORT_GUIDE.md) |
 | 版本更新历史？ | [CHANGELOG.md](../CHANGELOG.md) |
-| 性能测试快速参考 | [PERFORMANCE_QUICK_REFERENCE.md](../PERFORMANCE_QUICK_REFERENCE.md) |
 
 ## 📝 文档维护规范
 

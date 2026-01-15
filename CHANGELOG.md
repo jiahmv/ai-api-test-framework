@@ -34,7 +34,7 @@
 
 ### 文档
 - 📝 新增性能测试完整指南（PERFORMANCE_TESTING.md）
-- 📝 新增性能测试快速参考（PERFORMANCE_QUICK_REFERENCE.md）
+- 📝 新增性能测试快速参考（PERFORMANCE_QUICK_REFERENCE.md）(注: 后续版本已合并到 PERFORMANCE_TESTING.md)
 - 📝 新增 Bug 修复报告（BUG_FIX_REPORT.md）
 - 📝 更新 README.md，添加性能测试功能说明
 

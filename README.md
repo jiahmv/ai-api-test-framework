@@ -526,7 +526,7 @@ assertions.assert_schema(
 )
 ```
 
-**详细说明请查看**: [ASSERTION_IMPROVEMENT.md](ASSERTION_IMPROVEMENT.md)
+**详细说明请查看**: [ASSERTION_IMPROVEMENT.md](docs/development/ASSERTION_IMPROVEMENT.md)
 
 ## 常见问题
 
